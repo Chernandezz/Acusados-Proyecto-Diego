@@ -5,42 +5,44 @@
 
 
 
-<h1>MENU PRINCIPAL ACUSADOS</h1>
+<h1>MENU PRINCIPAL ACUSACIONES</h1>
 
 @if (Session::has('mensaje'))
   {{Session::get('mensaje')}}
 @endif
 
-<a href="{{url('/')}}">Regresar</a>
-<a href="{{url('/acusados/create')}}">Crear nuevo Acusado</a>
+<a href="{{url('/acusados')}}">Regresar</a>
+<a href="{{url('/acusaciones/'.$acusado.'/create')}}">Crear nueva acusacion</a>
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Cedula</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Telefono</th>
+      <th scope="col">#</th>
+      <th scope="col">Cedula Acusado</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Culpable</th>
       <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
-    @foreach ($acusados as $acusado)
+    @foreach ($acusaciones as $acusacion)
       <tr>
-        <td>{{$acusado->cedula}}</td>
-        <td>{{$acusado->nombre}}</td>
-        <td>{{$acusado->telefono}}</td>
-        <td>
+        <td>{{$acusacion->id}}</td>
+        <td>{{$acusacion->cedulaAcusado}}</td>
+        <td>{{$acusacion->Descripcion}}</td>
+        <td>{{$acusacion->Culpable}}</td>
+        {{-- <td>
           <a href="{{url('/acusados/'.$acusado->cedula.'/edit')}}">
             Editar
           </a>
-          | <a href="{{url('/acusaciones/'.$acusado->cedula)}}">Acusaciones</a> | 
+          | <a href="{{url('/acusaciones')}}"></a> | 
           <form action="{{url('/acusados/'.$acusado->cedula)}}" method="POST">
             @csrf
             {{method_field('DELETE')}}
             <input type="submit" onclick="return confirm('¿Desea Borrar?')" value="Borrar">
           </form>
 
-        </td>
+        </td> --}}
       </tr>
     @endforeach
     

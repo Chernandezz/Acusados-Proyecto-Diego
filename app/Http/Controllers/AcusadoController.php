@@ -35,14 +35,17 @@ class AcusadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {dd("juancho");
         $campos = [
-            'cedula'=>'required|string|max:14',
+            'cedula'=>'required|numeric',
             'nombre'=>'required|string|max:40',
             'telefono'=>'required|string|max:14'
         ];
         $mensaje=[
-            'required'=>'El :attribute es requerido'
+            'required'=>'El :attribute es requerido',
+            'cedula.required'=>'La cedula es requerida',
+            'numeric'=>'El :attribute debe ser un numero',
+            'cedula.numeric'=>'La :attribute debe ser un numero'
         ];
         $this->validate($request,$campos,$mensaje);
         $datosAcusado = request()->except('_token');
@@ -83,6 +86,16 @@ class AcusadoController extends Controller
      */
     public function update(Request $request, $cedula)
     {
+
+         $campos = [
+            'nombre'=>'required|string|max:40',
+            'telefono'=>'required|string|max:14'
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'numeric'=>'El :attribute debe ser un numero'
+        ];
+        $this->validate($request,$campos,$mensaje);
         $datosAcusado = request()->except('_token','_method');
         Acusado::where('cedula','=',$cedula)->update($datosAcusado);
 

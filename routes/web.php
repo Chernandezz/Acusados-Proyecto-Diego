@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AcusadoController;
+use App\Http\Controllers\AcusacionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +20,9 @@ Route::get('/', function () {
 });
 
 Route::resource('acusados',AcusadoController::class);
+
+Route::get('/acusaciones/{cedulaAcusado}', [AcusacionController::class,'index']);
+Route::get('/acusaciones/{cedulaAcusado}/create', [AcusacionController::class,'create']);
+Route::post('/acusaciones', [AcusacionController::class,'store']);
+
+
