@@ -29,7 +29,12 @@
         <td>{{$acusacion->id}}</td>
         <td>{{$acusacion->cedulaAcusado}}</td>
         <td>{{$acusacion->Descripcion}}</td>
-        <td>{{$acusacion->Culpable}}</td>
+        @if ($acusacion->Culpable)
+          <td>Verdadero</td>
+        @else
+          <td>Falso</td>
+        @endif
+        
         {{-- <td>
           <a href="{{url('/acusados/'.$acusado->cedula.'/edit')}}">
             Editar
