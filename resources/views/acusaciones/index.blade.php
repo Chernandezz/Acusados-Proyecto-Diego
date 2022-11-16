@@ -13,7 +13,7 @@
 
 <a href="{{url('/acusados')}}">Regresar</a>
 <a href="{{url('/acusaciones/'.$acusado.'/create')}}">Crear nueva acusacion</a>
-
+<div class="div" style="overflow-x:auto;">
 <table class="table">
   <thead>
     <tr>
@@ -21,7 +21,6 @@
       <th scope="col">Cedula Acusado</th>
       <th scope="col">Descripcion</th>
       <th scope="col">Culpable</th>
-      <th scope="col">Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -48,6 +47,8 @@
     
   </tbody>
 </table>
+</div>
+<a href="{{url('/acusaciones/juzgar/'.$acusado)}}">Juzgar Acusado</a>
 </div>
 @endsection
 

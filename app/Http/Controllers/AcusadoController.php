@@ -35,7 +35,7 @@ class AcusadoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {dd("juancho");
+    {
         $campos = [
             'cedula'=>'required|numeric',
             'nombre'=>'required|string|max:40',

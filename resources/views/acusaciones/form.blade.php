@@ -15,8 +15,8 @@
 
   <h1>{{$modo}} acusaciones</h1>
   
-  <label for="cedula">Cedula Acusado</label>
-  <input type="text" name="cedula" value="{{$acusado->cedula}}" readonly={{$acusado->cedula}}id="cedula" disabled>
+  <label for="cedulaAcusado">Cedula Acusado</label>
+  <input type="text" name="cedulaAcusado" value="{{$acusado->cedula}}" readonly="readonly" id="cedulaAcusado">
   <br/>
   <label for="descripcion">Descripcion</label>
   <textarea name="descripcion" rows="3" cols="30" placeholder="Escriba una descripción" value="{{old('descripcion')}}"></textarea>

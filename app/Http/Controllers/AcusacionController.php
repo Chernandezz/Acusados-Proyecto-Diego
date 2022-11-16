@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Acusacion;
 use App\Models\Acusado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AcusacionController extends Controller
 {
@@ -50,20 +51,40 @@ class AcusacionController extends Controller
         // ];
         // $this->validate($request,$campos,$mensaje);
         $datosAcusacion = request()->except('_token');
-        dd($datosAcusacion);
         Acusacion::insert($datosAcusacion);
         return redirect('acusados')->with('mensaje', 'Acusacion agregada exitosamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Acusacion  $acusacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Acusacion $acusacion)
-    {
-        //
+    
+    public function juzgar($cedulaAcusado){
+        $resultados = DB::table('acusaciones')
+                ->select('*')
+                ->where('cedulaAcusado', '=', $cedulaAcusado)
+                ->get()
+                ->toArray();
+        $acusado = DB::table('acusados')
+                ->select('*')
+                ->where('cedula', '=', $cedulaAcusado)
+                ->get()
+                ->toArray();
+        $data["acusado"] = $acusado[0];
+        $data["totalAcusaciones"] = count($resultados);
+        $data["acusacionesCulpable"] = 0;
+        $data["acusacionesInocente"] = 0;
+        foreach($resultados  as $acusacion){
+            if($acusacion->Culpable == 1){
+                $data["acusacionesCulpable"]++;
+            }else{
+                $data["acusacionesInocente"]++;
+            }
+        }
+        if($data["acusacionesCulpable"]/$data["totalAcusaciones"] >= 0.75){
+            $data["esCulpable"] = true;
+        }else{
+            $data["esCulpable"] = false;
+        }
+        
+        return view('acusaciones.juzgar', $data);
     }
 
     /**

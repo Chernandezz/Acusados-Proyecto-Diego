@@ -24,5 +24,6 @@ Route::resource('acusados',AcusadoController::class);
 Route::get('/acusaciones/{cedulaAcusado}', [AcusacionController::class,'index']);
 Route::get('/acusaciones/{cedulaAcusado}/create', [AcusacionController::class,'create']);
 Route::post('/acusaciones', [AcusacionController::class,'store']);
+Route::get('/acusaciones/juzgar/{cedulaAcusado}', [AcusacionController::class,'juzgar']);
 
 
